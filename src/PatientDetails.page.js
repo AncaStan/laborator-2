@@ -66,11 +66,23 @@ class PatientDetailsPage extends Component {
     fetchAppointment = () => {
         axios.get(`https://hapi.fhir.org/baseDstu3/Appointment?_pretty=true&patient=${this.patientId}`).then((response) => {
             let appointment = response.data;
+            let description = "no description";
+            let participants = [];
 
+            if(appointment.description) {
+                description = appointment.description;
+            }
 
+            if(appointment.participant && appointment.participant.length > 0) {
+                for(let i = 0; i < appointment.participant.length; i++) {
+                    let participant = appointment.participant[i];
+                    if(participant.actor && participant.actor.display) {
+                        participants.push(participant.actor.display);
+                    }
+                }
+            }
 
-
-
+            this.setState({...this.state, appointment: {description, participants}});
     }).catch((error) => {
             console.log("Patients page error: " + error);
         });
@@ -81,8 +93,8 @@ class PatientDetailsPage extends Component {
             <div className="page-container">
                 <p className="page-title"><i className="icon fas fa-file-medical-alt"></i>Patient Details</p>
                 <div>
-                    <p>Encounters: </p>
-                    <p>CarePlan: </p>
+                    <p>{"Encounters: " + this.state.encounters}</p>
+                    <p>{"CarePlan:" + "" }</p>
                     <p>Appointment: </p>
                 </div>
             </div>
