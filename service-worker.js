@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/laborator-2-eHealth/precache-manifest.b8994392f2dadbf7d11fd03d794ec8a0.js"
+  "/laborator-2-eHealth/precache-manifest.c2eb9eeae8b52da93e51cc2fea56bb2c.js"
 );
 
 self.addEventListener('message', (event) => {
