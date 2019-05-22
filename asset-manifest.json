@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/laborator-2-eHealth/static/css/main.e6ab37d1.chunk.css",
+    "main.js": "/laborator-2-eHealth/static/js/main.af7c84d3.chunk.js",
+    "main.js.map": "/laborator-2-eHealth/static/js/main.af7c84d3.chunk.js.map",
+    "runtime~main.js": "/laborator-2-eHealth/static/js/runtime~main.0d626782.js",
+    "runtime~main.js.map": "/laborator-2-eHealth/static/js/runtime~main.0d626782.js.map",
+    "static/js/2.1cdd753e.chunk.js": "/laborator-2-eHealth/static/js/2.1cdd753e.chunk.js",
+    "static/js/2.1cdd753e.chunk.js.map": "/laborator-2-eHealth/static/js/2.1cdd753e.chunk.js.map",
+    "index.html": "/laborator-2-eHealth/index.html",
+    "precache-manifest.9a62959d4952e887f05577cfb23729fa.js": "/laborator-2-eHealth/precache-manifest.9a62959d4952e887f05577cfb23729fa.js",
+    "service-worker.js": "/laborator-2-eHealth/service-worker.js",
+    "static/css/main.e6ab37d1.chunk.css.map": "/laborator-2-eHealth/static/css/main.e6ab37d1.chunk.css.map"
+  }
+}
