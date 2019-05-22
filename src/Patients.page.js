@@ -17,8 +17,7 @@ class PatientsPage extends Component {
     }
 
     fetchPatients = () => {
-        axios.get("http://hapi.fhir.org/baseDstu3/Patient?_pretty=true&_count=50").then((response) => {
-            console.log(response.data.entry);
+        axios.get("https://hapi.fhir.org/baseDstu3/Patient?_pretty=true&_count=50").then((response) => {
             let patients = response.data.entry;
             let filteredPatients = [];
 
@@ -70,11 +69,7 @@ class PatientsPage extends Component {
     }
 
     handleChange = (event) => {
-        console.log("handle change");
-        console.log(event.target.value);
         let query = event.target.value;
-        // this.setState({...this.state, searchText: event.target.value});
-
         this.setState(prevState => {
             const filteredData = prevState.patients.filter(patient => {
               return patient.id.startsWith(query);

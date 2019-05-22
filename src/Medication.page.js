@@ -16,7 +16,7 @@ class MedicationPage extends Component {
     }
 
     fetchMedication = () => {
-        axios.get("http://hapi.fhir.org/baseDstu3/Medication?_pretty=true&_count=50").then((response) => {
+        axios.get("https://hapi.fhir.org/baseDstu3/Medication?_pretty=true&_count=50").then((response) => {
             let medication = response.data.entry;
             let filteredMedication = [];
 

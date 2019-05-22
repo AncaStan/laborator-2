@@ -24,28 +24,54 @@ class PatientDetailsPage extends Component {
     }
 
     fetchEncounters = () => {
-        axios.get(`http://hapi.fhir.org/baseDstu3/Encounter?_pretty=true&patient=${this.patientId}`).then((response) => {
-            console.log("encounters");
-            console.log(response.data);
+        axios.get(`https://hapi.fhir.org/baseDstu3/Encounter?_pretty=true&patient=${this.patientId}`).then((response) => {
+            let encounters = response.data;
+            if(encounters.reason && encounters.reason.length > 0) {
+                this.setState({...this.state, encounters: encounters.reason[0].text});
+            }
         }).catch((error) => {
             console.log("Patients page error: " + error);
         });
     }
 
     fetchCarePlan = () => {
-        axios.get(`http://hapi.fhir.org/baseDstu3/CarePlan?_pretty=true&patient=${this.patientId}`).then((response) => {
-            console.log("care plan");
-            console.log(response.data);
-        }).catch((error) => {
+        axios.get(`https://hapi.fhir.org/baseDstu3/CarePlan?_pretty=true&patient=${this.patientId}`).then((response) => {
+        let carePlan = response.data;
+        let category = "no category";
+        let activities = [];
+
+        if(carePlan.category && carePlan.category.length > 0) {
+            if(carePlan.category.coding && carePlan.category.coding.length > 0) {
+                if(carePlan.category.coding[0].display) {
+                    category = carePlan.category.coding[0].display;
+                }
+            }
+        }
+
+        if(carePlan.activity && carePlan.activity.length > 0) {
+            for(let i = 0; i < carePlan.activity.length; i++) {
+                let step = carePlan.activity[i];
+                if(step.detail && step.detail.code && step.detail.code.coding && step.detail.code.coding.length > 0 && step.detail.code.coding[0].display) {
+                    activities.push(step.detail.code.coding[0].display);
+                }
+            }
+        }
+
+        this.setState({...this.state, carePlan: {category, activities}});
+    }).catch((error) => {
             console.log("Patients page error: " + error);
         });
     }
 
     fetchAppointment = () => {
-        axios.get(`http://hapi.fhir.org/baseDstu3/Appointment?_pretty=true&patient=${this.patientId}`).then((response) => {
-            console.log("appointment");
-            console.log(response.data);
-        }).catch((error) => {
+        axios.get(`https://hapi.fhir.org/baseDstu3/Appointment?_pretty=true&patient=${this.patientId}`).then((response) => {
+            let appointment = response.data;
+
+
+
+
+
+    }).catch((error) => {
             console.log("Patients page error: " + error);
         });
     }
