@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/laborator-2-eHealth/static/css/main.e6ab37d1.chunk.css",
-    "main.js": "/laborator-2-eHealth/static/js/main.28a42893.chunk.js",
-    "main.js.map": "/laborator-2-eHealth/static/js/main.28a42893.chunk.js.map",
-    "runtime~main.js": "/laborator-2-eHealth/static/js/runtime~main.0d626782.js",
-    "runtime~main.js.map": "/laborator-2-eHealth/static/js/runtime~main.0d626782.js.map",
-    "static/js/2.3c838994.chunk.js": "/laborator-2-eHealth/static/js/2.3c838994.chunk.js",
-    "static/js/2.3c838994.chunk.js.map": "/laborator-2-eHealth/static/js/2.3c838994.chunk.js.map",
-    "index.html": "/laborator-2-eHealth/index.html",
-    "precache-manifest.c2eb9eeae8b52da93e51cc2fea56bb2c.js": "/laborator-2-eHealth/precache-manifest.c2eb9eeae8b52da93e51cc2fea56bb2c.js",
-    "service-worker.js": "/laborator-2-eHealth/service-worker.js",
-    "static/css/main.e6ab37d1.chunk.css.map": "/laborator-2-eHealth/static/css/main.e6ab37d1.chunk.css.map"
+    "main.css": "/laborator-2/static/css/main.e6ab37d1.chunk.css",
+    "main.js": "/laborator-2/static/js/main.28a42893.chunk.js",
+    "main.js.map": "/laborator-2/static/js/main.28a42893.chunk.js.map",
+    "runtime~main.js": "/laborator-2/static/js/runtime~main.8a63d308.js",
+    "runtime~main.js.map": "/laborator-2/static/js/runtime~main.8a63d308.js.map",
+    "static/js/2.3c838994.chunk.js": "/laborator-2/static/js/2.3c838994.chunk.js",
+    "static/js/2.3c838994.chunk.js.map": "/laborator-2/static/js/2.3c838994.chunk.js.map",
+    "index.html": "/laborator-2/index.html",
+    "precache-manifest.2d3a905287ae5ff50d9380ad7890d7fe.js": "/laborator-2/precache-manifest.2d3a905287ae5ff50d9380ad7890d7fe.js",
+    "service-worker.js": "/laborator-2/service-worker.js",
+    "static/css/main.e6ab37d1.chunk.css.map": "/laborator-2/static/css/main.e6ab37d1.chunk.css.map"
   }
 }
