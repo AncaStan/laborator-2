@@ -1,0 +1,29 @@
+.page-container {
+  	background-color: #282c34;
+  	min-height: 100vh;
+  	color: #ffffff;
+  	display: flex;
+  	flex-direction: column;
+  	padding: 100px;
+}
+
+.page-title {
+	text-align: center;
+  	font-size: 30px;
+  	font-weight: bold;
+}
+
+.input-container {
+	background-color: #282c34;
+	outline: none;
+    border: none;
+    border-bottom: 2px solid #ffffff;
+    padding: 20px;
+    color: #ffffff;
+    margin-right: 25px;
+}
+
+::placeholder {
+	color: #ffffff;
+	opacity: 1;
+  }
