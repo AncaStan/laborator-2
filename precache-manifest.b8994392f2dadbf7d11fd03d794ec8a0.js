@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "41016c4ef920eef3ad41f050d0fe411f",
+    "revision": "1b2dbb8fe371ff5be8e82415c78632a4",
     "url": "/laborator-2-eHealth/index.html"
   },
   {
-    "revision": "a7755806dcfb3e8f8df9",
+    "revision": "7891f07a0ba15b76d432",
     "url": "/laborator-2-eHealth/static/css/main.e6ab37d1.chunk.css"
   },
   {
-    "revision": "049c60047fcc3cd6345c",
-    "url": "/laborator-2-eHealth/static/js/2.1cdd753e.chunk.js"
+    "revision": "77811c15efb243d50ab8",
+    "url": "/laborator-2-eHealth/static/js/2.3c838994.chunk.js"
   },
   {
-    "revision": "a7755806dcfb3e8f8df9",
-    "url": "/laborator-2-eHealth/static/js/main.3f3d56cd.chunk.js"
+    "revision": "7891f07a0ba15b76d432",
+    "url": "/laborator-2-eHealth/static/js/main.45eb5593.chunk.js"
   },
   {
     "revision": "4c9e37d1efa9486eba33",
