@@ -65,7 +65,7 @@ class PatientsPage extends Component {
     };
 
     handleClick = (patientId) => {
-        this.props.history.push({pathname: "/patient-details", state: {patientId: patientId}});
+        this.props.history.push({pathname: "/patient-details", state: {patientId: parseInt(patientId)}});
     };
 
     handleChange = (event) => {

@@ -17,7 +17,7 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import Button from '@material-ui/core/Button';
 
 const actionsStyles = theme => ({
-  root: {
+	root: {
     flexShrink: 0,
     color: theme.palette.text.secondary,
     marginLeft: theme.spacing.unit * 2.5,
@@ -80,19 +80,19 @@ class TableActions extends Component {
 const TableActionsWrapped = withStyles(actionsStyles, { withTheme: true })(TableActions);
 
 const styles = theme => ({
-  root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
-  },
-  table: {
-    minWidth: 500,
-  },
-  tableWrapper: {
-    overflowX: 'auto',
-  },
-  button: {
-    margin: theme.spacing.unit,
-  }
+	root: {
+    	width: '100%',
+    	marginTop: theme.spacing.unit * 3,
+  	},
+  	table: {
+    	minWidth: 500,
+  	},
+  	tableWrapper: {
+    	overflowX: 'auto',
+  	},
+  	button: {
+    	margin: theme.spacing.unit,
+  	}
 });
 
 const CustomTableCell = withStyles(theme => ({

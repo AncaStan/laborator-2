@@ -17,7 +17,12 @@ class PatientDetailsPage extends Component {
             isAppointment: false
         };
 
-        this.patientId = this.props.history.location.state.patientId;
+        if(this.props.history.location.state && this.props.history.location.state.patientId) {
+            this.patientId = this.props.history.location.state.patientId;
+            localStorage.setItem("patientId", JSON.stringify(this.patientId));
+        } else {
+            this.patientId = localStorage.getItem("patientId");
+        }
     }
 
     componentDidMount() {
@@ -131,7 +136,7 @@ class PatientDetailsPage extends Component {
     render() {
         return (
             <div className="page-container">
-                <p className="page-title"><i className="icon fas fa-file-medical-alt"></i>Patient Details</p>
+                <p className="page-title"><i className="icon fas fa-file-medical-alt"></i>{"Patient Details: " + this.patientId}</p>
                 {this.state.isEncounters && this.state.isCarePlan && this.state.isAppointment &&
                 <div className="details-container">
                     {this.state.encounters && <p>{"ENCOUNTERS: " + this.state.encounters}</p>}
