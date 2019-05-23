@@ -9,9 +9,12 @@ class PatientDetailsPage extends Component {
         super(props);
 
         this.state = {
-            encouters: "",
+            encounters: "",
             carePlan: "",
-            appointment: ""
+            appointment: "",
+            isEncounters: false,
+            isCarePlan: false,
+            isAppointment: false
         };
 
         this.patientId = this.props.history.location.state.patientId;
@@ -24,79 +27,118 @@ class PatientDetailsPage extends Component {
     }
 
     fetchEncounters = () => {
-        axios.get(`https://hapi.fhir.org/baseDstu3/Encounter?_pretty=true&patient=${this.patientId}`).then((response) => {
-            let encounters = response.data;
-            if(encounters.reason && encounters.reason.length > 0) {
-                this.setState({...this.state, encounters: encounters.reason[0].text});
+        axios.get(`https://hapi.fhir.org/baseDstu3/Encounter?_include=Encounter:patient&_pretty=true&patient=${this.patientId}`).then((response) => {
+            let data = response.data;
+            let encounters = "no encounters";
+
+            if(data.reason && data.reason.length > 0) {
+                if(data.reason[0].text) {
+                    encounters = data.reason[0].text;
+                }
             }
+
+            this.setState({...this.state, encounters, isEncounters: true});
         }).catch((error) => {
             console.log("Patients page error: " + error);
         });
-    }
+    };
 
     fetchCarePlan = () => {
-        axios.get(`https://hapi.fhir.org/baseDstu3/CarePlan?_pretty=true&patient=${this.patientId}`).then((response) => {
-        let carePlan = response.data;
-        let category = "no category";
-        let activities = [];
+        axios.get(`https://hapi.fhir.org/baseDstu3/CarePlan?_include=CarePlan:patient&_pretty=true&patient=${this.patientId}`).then((response) => {
+        let data = response.data;
+        let carePlan = {};
 
-        if(carePlan.category && carePlan.category.length > 0) {
-            if(carePlan.category.coding && carePlan.category.coding.length > 0) {
-                if(carePlan.category.coding[0].display) {
-                    category = carePlan.category.coding[0].display;
+        if(data.category && data.category.length > 0) {
+            if(data.category.coding && data.category.coding.length > 0) {
+                if(data.category.coding[0].display) {
+                    carePlan.category = data.category.coding[0].display;
                 }
             }
         }
 
-        if(carePlan.activity && carePlan.activity.length > 0) {
-            for(let i = 0; i < carePlan.activity.length; i++) {
-                let step = carePlan.activity[i];
+        if(data.activity && data.activity.length > 0) {
+            carePlan.activities = [];
+            for(let i = 0; i < data.activity.length; i++) {
+                let step = data.activity[i];
                 if(step.detail && step.detail.code && step.detail.code.coding && step.detail.code.coding.length > 0 && step.detail.code.coding[0].display) {
-                    activities.push(step.detail.code.coding[0].display);
+                    carePlan.activities.push(step.detail.code.coding[0].display);
                 }
             }
         }
 
-        this.setState({...this.state, carePlan: {category, activities}});
+        this.setState({...this.state, carePlan, isCarePlan: true});
     }).catch((error) => {
             console.log("Patients page error: " + error);
         });
-    }
+    };
 
     fetchAppointment = () => {
-        axios.get(`https://hapi.fhir.org/baseDstu3/Appointment?_pretty=true&patient=${this.patientId}`).then((response) => {
-            let appointment = response.data;
-            let description = "no description";
-            let participants = [];
+        axios.get(`https://hapi.fhir.org/baseDstu3/Appointment?_include=Appointment:patient&_pretty=true&patient=${this.patientId}`).then((response) => {
+            let data = response.data;
+            let appointment = {};
 
-            if(appointment.description) {
-                description = appointment.description;
+            if(data.description) {
+                appointment.description = data.description;
             }
 
-            if(appointment.participant && appointment.participant.length > 0) {
-                for(let i = 0; i < appointment.participant.length; i++) {
-                    let participant = appointment.participant[i];
+            if(data.participant && data.participant.length > 0) {
+                appointment.participants = [];
+                for(let i = 0; i < data.participant.length; i++) {
+                    let participant = data.participant[i];
                     if(participant.actor && participant.actor.display) {
-                        participants.push(participant.actor.display);
+                        appointment.participants.push(participant.actor.display);
                     }
                 }
             }
 
-            this.setState({...this.state, appointment: {description, participants}});
+            this.setState({...this.state, appointment, isAppointment: true});
     }).catch((error) => {
             console.log("Patients page error: " + error);
         });
-    }
+    };
+
+    displayCarePlan = () => {
+        let carePlan = "no care plan";
+
+        if(this.state.carePlan.category) {
+            carePlan = this.state.carePlan.category;
+        }
+        if(this.state.carePlan.activities && this.state.carePlan.activities.length > 0) {
+            for(let i = 0; i < this.state.carePlan.activities.length; i++) {
+                carePlan = carePlan + "|" + this.state.carePlan.activities[i];
+            }
+        }
+
+        return carePlan;
+    };
+
+    displayAppointment = () => {
+      let appointment = "no appointment";
+
+        if(this.state.appointment.description) {
+            appointment = this.state.appointment.description;
+        }
+        if(this.state.appointment.participants && this.state.appointment.participants.length > 0) {
+            for(let i = 0; i < this.state.appointment.participants.length; i++) {
+                appointment = appointment + "|" + this.state.appointment.participants[i];
+            }
+        }
+
+        return appointment;
+
+    };
 
     render() {
         return (
             <div className="page-container">
                 <p className="page-title"><i className="icon fas fa-file-medical-alt"></i>Patient Details</p>
-                <div>
-                    <p>{"Encounters: " + this.state.encounters}</p>
-                    <p>{"CarePlan:" + "" }</p>
-                    <p>Appointment: </p>
+                {this.state.isEncounters && this.state.isCarePlan && this.state.isAppointment &&
+                <div className="details-container">
+                    {this.state.encounters && <p>{"ENCOUNTERS: " + this.state.encounters}</p>}
+                    {this.state.carePlan && <p>{"CARE PLAN: " + this.displayCarePlan()}</p>}
+                    {this.state.appointment && <p>{"APPOINTMENT: " + this.displayAppointment()}</p>}
                 </div>
+                }
             </div>
         )
     }

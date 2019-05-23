@@ -129,8 +129,6 @@ class CustomTable extends Component {
     	const { classes, items, columns } = this.props;
 		const emptyRows = rowsPerPage - Math.min(rowsPerPage, items.length - page * rowsPerPage);
 		
-		console.log(items);
-
     	return (
       		<Paper className={classes.root}>
         		<div className={classes.tableWrapper}>

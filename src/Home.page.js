@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import "./Home.page.css";
 import "./App.css";
 
 class HomePage extends Component {
     
     handleClick = (pathname) => {
         this.props.history.push(pathname);
-    }
+    };
 
     render() {
         return (

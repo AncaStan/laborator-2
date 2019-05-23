@@ -12,8 +12,12 @@ class PatientsPage extends Component {
         this.state = {
             searchText: "",
             patients: [],
-            filteredData: [],
+            filteredData: []
         };
+    }
+
+    componentDidMount() {
+        this.fetchPatients();
     }
 
     fetchPatients = () => {
@@ -54,33 +58,26 @@ class PatientsPage extends Component {
                 filteredPatients.push(patientObj);
             }
 
-            this.setState({patients: filteredPatients, filteredData: filteredPatients}, () => {console.log(this.state.patients)});
+            this.setState({patients: filteredPatients, filteredData: filteredPatients});
         }).catch((error) => {
             console.log("Patients page error: " + error);
         })
-    }
-
-    componentDidMount() {
-        this.fetchPatients();
-    }
+    };
 
     handleClick = (patientId) => {
         this.props.history.push({pathname: "/patient-details", state: {patientId: patientId}});
-    }
+    };
 
     handleChange = (event) => {
-        let query = event.target.value;
+        let searchText = event.target.value;
         this.setState(prevState => {
             const filteredData = prevState.patients.filter(patient => {
-              return patient.id.startsWith(query);
+                return patient.id.startsWith(searchText);
             });
       
-            return {
-              query,
-              filteredData
-            };
+            return {searchText, filteredData};
           });
-    }
+    };
 
     render() {
         let columns = ["PATIENT ID", "FULL NAME", "BIRTHDATE", "GENDER", ""];

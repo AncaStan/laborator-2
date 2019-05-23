@@ -10,8 +10,7 @@ class MedicationPage extends Component {
         super(props);
 
         this.state = {
-            medication: [],
-            isFetched: false
+            medication: []
         };
     }
 
@@ -42,31 +41,28 @@ class MedicationPage extends Component {
                             medicationObj.name = name[0].display;
                         }
                     }
-                    console.log(medicationObj);
                 }
 
                 filteredMedication.push(medicationObj)
             }
 
-            this.setState({isFetched: true, medication: filteredMedication}, () => {console.log(this.state.medication)});
+            this.setState({medication: filteredMedication});
         }).catch((error) => {
             console.log("Medication page error: " + error);
         })
-    }
+    };
 
     componentWillMount() {
-        console.log("component did mount");
         this.fetchMedication();
     }
 
     render() {
         let columns = ["MEDICATION ID", "NAME", "ANTIBIOTIC"];
-        console.log("render");
 
         return (
             <div className="page-container">
                 <p className="page-title"><i className="icon fas fa-capsules"></i>Medication</p>
-                {this.state.isFetched && <div><Table items={this.state.medication} columns={columns}/></div>}
+                <div><Table items={this.state.medication} columns={columns}/></div>
             </div>
         )
     }
